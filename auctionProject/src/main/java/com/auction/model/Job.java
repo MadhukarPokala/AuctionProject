@@ -42,15 +42,12 @@ public class Job implements Serializable {
     @JsonDeserialize(using = DateUtil.class)
     private Date expiryDate;
 
-
     private Boolean active;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "postedBy", nullable = false)
     @JsonIgnore
     private User postedBy;
-
-    private String postedByUser;
 
     @Override
     public boolean equals(Object o) {
@@ -68,9 +65,7 @@ public class Job implements Serializable {
 
     @JsonGetter("posted by")
     protected String getBrandName() {
-        if (postedBy != null)
-            postedByUser = postedBy.getFullName();
-        return postedByUser;
+        return postedBy.getFullName();
     }
 
 }
